@@ -1,14 +1,15 @@
 package com.matheusfinamor.tgym.presentation.signin
 
 import android.os.Bundle
-import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.google.android.material.textfield.TextInputLayout
+import androidx.navigation.findNavController
 import com.matheusfinamor.tgym.R
 import com.matheusfinamor.tgym.databinding.FragmentSignInBinding
+import com.matheusfinamor.tgym.presentation.comum.setDefaultPasswordIcon
+import com.matheusfinamor.tgym.presentation.comum.setPasswordVisibilityToggle
 
 class SignInFragment : Fragment() {
 
@@ -25,30 +26,14 @@ class SignInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setDefaultIconMode()
-        setClickIconPassword()
+        binding.tilSignInPassword.setDefaultPasswordIcon(binding.tilSignInPassword)
+        binding.tilSignInPassword.setPasswordVisibilityToggle(binding.etPassword)
+        goToRegisterFragment()
     }
 
-    private fun setClickIconPassword() {
-        binding.tilSignInPassword.setEndIconOnClickListener {
-            val isPasswordVisible = binding.etPassword.transformationMethod == null
-
-            if (isPasswordVisible) {
-                binding.etPassword.transformationMethod = PasswordTransformationMethod()
-                binding.tilSignInPassword.setEndIconDrawable(R.drawable.eye_open)
-            } else {
-                binding.etPassword.transformationMethod = null
-                binding.tilSignInPassword.setEndIconDrawable(R.drawable.eye_closed)
-            }
-            binding.etPassword.setSelection(binding.etPassword.text?.length ?: 0)
-
-        }
-    }
-
-    private fun setDefaultIconMode() {
-        binding.tilSignInPassword.apply {
-            endIconMode = TextInputLayout.END_ICON_CUSTOM
-            setEndIconDrawable(R.drawable.eye_open)
+    private fun goToRegisterFragment() {
+        binding.tvRegister.setOnClickListener {
+            it.findNavController().navigate(R.id.action_signInFragment_to_registerFragment)
         }
     }
 
