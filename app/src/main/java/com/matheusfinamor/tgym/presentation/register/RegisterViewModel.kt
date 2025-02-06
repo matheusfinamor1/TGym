@@ -1,16 +1,28 @@
 package com.matheusfinamor.tgym.presentation.register
 
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import androidx.lifecycle.viewModelScope
+import com.matheusfinamor.tgym.ValidationPassword
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 
 class RegisterViewModel : ViewModel() {
 
-    private val _validatePassword = MutableStateFlow<Boolean?>(null)
-    val validatePassword: StateFlow<Boolean?> = _validatePassword
+    private val _validatePassword = MutableSharedFlow<ValidationPassword>()
+    val validatePassword: SharedFlow<ValidationPassword> = _validatePassword.asSharedFlow()
 
 
     fun validatePassword(passOne: String, passTwo: String) {
-        _validatePassword.value = passOne == passTwo
+        viewModelScope.launch {
+            val isValid = when {
+                passOne != passTwo -> ValidationPassword.INVALID
+                passOne.length < 6 -> ValidationPassword.INVALID
+                else -> ValidationPassword.VALID
+            }
+            _validatePassword.emit(isValid)
+        }
+
     }
 }
