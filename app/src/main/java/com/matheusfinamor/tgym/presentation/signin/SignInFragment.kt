@@ -1,4 +1,4 @@
-package com.matheusfinamor.tgym
+package com.matheusfinamor.tgym.presentation.signin
 
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputLayout
+import com.matheusfinamor.tgym.R
 import com.matheusfinamor.tgym.databinding.FragmentSignInBinding
 
 class SignInFragment : Fragment() {

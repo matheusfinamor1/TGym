@@ -10,7 +10,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/frameLayout"
-        android:name="com.matheusfinamor.tgym.SignInFragment"
+        android:name="com.matheusfinamor.tgym.presentation.signin.SignInFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </androidx.fragment.app.FragmentContainerView>
