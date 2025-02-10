@@ -29,11 +29,18 @@ class SignInFragment : Fragment() {
         binding.tilSignInPassword.setDefaultPasswordIcon(binding.tilSignInPassword)
         binding.tilSignInPassword.setPasswordVisibilityToggle(binding.etPassword)
         goToRegisterFragment()
+        goToHomeFragment()
     }
 
     private fun goToRegisterFragment() {
         binding.tvRegister.setOnClickListener {
             it.findNavController().navigate(R.id.action_signInFragment_to_registerFragment)
+        }
+    }
+
+    private fun goToHomeFragment() {
+        binding.btnLogin.setOnClickListener {
+            it.findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
         }
     }
 
